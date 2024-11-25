@@ -25,6 +25,10 @@
 		"attributesUnattachedAction": {
 			"type": "string",
 			"default": ""
+		},
+		"attributeValuesDisplayMethod": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"keywords": [ "WooCommerce" ],

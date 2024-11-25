@@ -189,6 +189,51 @@
 					}
 				}
 			}
+
+			td ul.wc-variations-attribute {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				padding-inline-start: 0px;
+				margin-block-end: 0px;
+
+				> li {
+					width: fit-content;
+					margin-bottom: 0.5em;
+					margin-right: 0.5em;
+					cursor: pointer;
+					user-select: none;
+					-webkit-user-select: none;
+					-webkit-user-select: none;
+					-moz-user-select: none;
+					-ms-user-select: none;
+
+					&:last-child {
+						margin-bottom: 0px;
+					}
+
+					&::marker {
+						content: "";
+						display: none;
+					}
+
+					button.wc-attribute-button {
+						// Add padding to product variation buttons.
+						padding: 0.6rem 0.6rem;
+						font-size: var(--wp--preset--font-size--small);
+					}
+
+					&.selected button.wc-attribute-button {
+						color: $primary;
+						background-color: $primarytext;
+
+					}
+				}
+			}
+
+			td > p.current-attribute-value {
+				margin-block-start: 0px;
+			}
 		}
 	}
 

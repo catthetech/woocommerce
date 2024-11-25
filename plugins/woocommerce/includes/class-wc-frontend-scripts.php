@@ -605,6 +605,7 @@ class WC_Frontend_Scripts {
 					'attributes_autoselect_type'         => get_option( 'attributes_autoselect_type' ),
 					'attributes_unattached_action'       => get_option( 'attributes_unattached_action' ),
 					'attributes_autoselect_on_page_load' => get_option( 'attributes_autoselect_on_page_load' ),
+					'attribute_values_display_method'    => get_option( 'attribute_values_display_method' ),
 				);
 				break;
 			case 'wc-country-select':

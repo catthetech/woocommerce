@@ -8,7 +8,11 @@
 			attributes_autoselect_on_page_load =
 				$form.parent( 'div.wp-block-add-to-cart-form.wc-block-add-to-cart-form' ).data( 'attributesAutoselectOnPageLoad' ) ||
 				wc_add_to_cart_variation_params.attributes_autoselect_on_page_load ||
-				'no';
+				'no',
+			attribute_values_display_method =
+				$form.parent( 'div.wp-block-add-to-cart-form.wc-block-add-to-cart-form' ).data( 'attributeValuesDisplayMethod' ) ||
+				wc_add_to_cart_variation_params.attribute_values_display_method ||
+				'dropdown';
 
 		self.$form                = $form;
 		self.$attributeFields     = $form.find( '.variations select' );
@@ -52,6 +56,46 @@
 		// Init after gallery.
 		setTimeout( function() {
 			$form.trigger( 'check_variations' );
+
+			if ( attribute_values_display_method === 'list' ) {
+				self.$attributeFields.each( function () {
+					const $current_attr_select = $( this )
+					const $current_attr_value = $( `<p class="current-attribute-value">${ $current_attr_select.children( `option[value="${ $current_attr_select.val() }"]` ).text() }</p>` )
+					const $attributes_values_list = $( '<ul role="radiogroup" class="wc-variations-attribute" />' )
+
+					$current_attr_select.find( 'option' ).each( function () {
+						const $current_option = $( this );
+						const $current_li = $(
+							`<li data-value="${ $current_option.val() }" role="radio">
+								<button class="wp-element-button wc-attribute-button">${ $current_option.text() || "Choose an option" }</button>
+							</li>`
+						);
+						$attributes_values_list.append( $current_li );
+					} );
+
+					$current_attr_select.css( "display", "none" );
+					$current_attr_value.add( $attributes_values_list ).insertAfter( $current_attr_select );
+				} );
+
+				$form.on(
+					"change.wc-variation-form", ".variations select", function () {
+						const $current_attr_select = $( this );
+						const $current_li = $current_attr_select.siblings( 'ul.wc-variations-attribute' ).children( `li[data-value="${ $current_attr_select.val() }"]` );
+						$current_attr_select.siblings( 'p.current-attribute-value' ).text( $current_attr_select.children( `option[value="${ $current_attr_select.val() }"]` ).text() );
+						$current_li.siblings( 'li' ).removeClass( 'selected' );
+						$current_li.addClass( 'selected' );
+					}
+				);
+				$form.on(
+					"click", ".variations ul.wc-variations-attribute li", function ( e ) {
+						e.preventDefault();
+						e.stopPropagation();
+						const $current_li = $( this );
+						const v = $current_li.data( 'value' );
+						$current_li.parent( 'ul' ).siblings( 'select' ).val( v ).trigger( "change" ).trigger( "click" );
+					}
+				);
+			}
 
 			if ( attributes_autoselect_on_page_load === 'yes' ) {
 				// Autoselect for all selects if there is only 1 option for each select

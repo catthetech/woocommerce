@@ -86,7 +86,8 @@ const AddToCartFormEdit = ( props: BlockEditProps< Attributes > ) => {
 	const {
 		attributesAutoselectType,
 		attributesAutoselectOnPageLoad,
-		attributesUnattachedAction
+		attributesUnattachedAction,
+		attributeValuesDisplayMethod,
 	} = attributes;
 
 	const InterfaceSettingsLink = () => {
@@ -255,6 +256,18 @@ const AddToCartFormEdit = ( props: BlockEditProps< Attributes > ) => {
 							{ label: __( 'Grayed-out but selectable (will clear all other attributes if selected)', 'woocommerce' ), value: 'gray' },
 						] }
 						onChange={ ( value ) => setAttributes( { attributesUnattachedAction: value } ) }
+						__nextHasNoMarginBottom
+					/>
+					<SelectControl
+						label={ __( "Values display method", "woocommerce" ) }
+						help={ __( 'This controls how to display the attribute values.', 'woocommerce' ) }
+						value={ attributeValuesDisplayMethod }
+						options={ [
+							{ label: __( 'Default',  'woocommerce' ), value: '' },
+							{ label: __( 'Dropdown', 'woocommerce' ), value: 'dropdown' },
+							{ label: __( 'List',     'woocommerce' ), value: 'list' },
+						] }
+						onChange={ ( value ) => setAttributes( { attributeValuesDisplayMethod: value } ) }
 						__nextHasNoMarginBottom
 					/>
 				</PanelBody>

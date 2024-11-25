@@ -94,6 +94,21 @@ class WC_Settings_Interface extends WC_Settings_Page {
 				),
 
 				array(
+					'title'    => __( 'Values display method', 'woocommerce' ),
+					'desc'     => __( 'This controls how to display the attribute values.', 'woocommerce' ),
+					'id'       => 'attribute_values_display_method',
+					'class'    => 'wc-enhanced-select',
+					'css'      => 'min-width:300px;',
+					'default'  => 'dropdown',
+					'type'     => 'select',
+					'options'  => array(
+						'dropdown' => __( 'Dropdown', 'woocommerce' ),
+						'list'    => __( 'List', 'woocommerce' ),
+					),
+					'desc_tip' => true,
+				),
+
+				array(
 					'type' => 'sectionend',
 					'id'   => 'attributes_dropdown_options',
 				),
