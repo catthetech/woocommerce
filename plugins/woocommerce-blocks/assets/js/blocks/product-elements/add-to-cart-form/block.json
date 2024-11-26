@@ -29,6 +29,10 @@
 		"attributeValuesDisplayMethod": {
 			"type": "string",
 			"default": ""
+		},
+		"attributesCurrentValueToggle": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"keywords": [ "WooCommerce" ],

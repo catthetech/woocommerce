@@ -88,6 +88,7 @@ const AddToCartFormEdit = ( props: BlockEditProps< Attributes > ) => {
 		attributesAutoselectOnPageLoad,
 		attributesUnattachedAction,
 		attributeValuesDisplayMethod,
+		attributesCurrentValueToggle,
 	} = attributes;
 
 	const InterfaceSettingsLink = () => {
@@ -268,6 +269,18 @@ const AddToCartFormEdit = ( props: BlockEditProps< Attributes > ) => {
 							{ label: __( 'List',     'woocommerce' ), value: 'list' },
 						] }
 						onChange={ ( value ) => setAttributes( { attributeValuesDisplayMethod: value } ) }
+						__nextHasNoMarginBottom
+					/>
+					<SelectControl
+						label={ __( 'Show current value (list)', 'woocommerce' ) }
+						help={ __( 'This controls whether or not the current value is shown above the list (only works when the value display method is set to list).', 'woocommerce' ) }
+						value={ attributesCurrentValueToggle }
+						options={ [
+							{ label: __( 'Default', 'woocommerce' ), value: '' },
+							{ label: __( 'Yes',     'woocommerce' ), value: 'yes' },
+							{ label: __( 'No',      'woocommerce' ), value: 'no' },
+						] }
+						onChange={ ( ) => setAttributes( { attributesAutoselectOnPageLoad: ! attributesAutoselectOnPageLoad } ) }
 						__nextHasNoMarginBottom
 					/>
 				</PanelBody>

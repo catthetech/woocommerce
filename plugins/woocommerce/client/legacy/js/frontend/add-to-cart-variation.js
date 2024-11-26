@@ -12,7 +12,11 @@
 			attribute_values_display_method =
 				$form.parent( 'div.wp-block-add-to-cart-form.wc-block-add-to-cart-form' ).data( 'attributeValuesDisplayMethod' ) ||
 				wc_add_to_cart_variation_params.attribute_values_display_method ||
-				'dropdown';
+				'dropdown',
+			attributes_current_value_toggle =
+				$form.parent( 'div.wp-block-add-to-cart-form.wc-block-add-to-cart-form' ).data( 'attributesCurrentValueToggle' ) ||
+				wc_add_to_cart_variation_params.attributes_current_value_toggle ||
+				'yes';
 
 		self.$form                = $form;
 		self.$attributeFields     = $form.find( '.variations select' );
@@ -75,6 +79,10 @@
 
 					$current_attr_select.css( "display", "none" );
 					$current_attr_value.add( $attributes_values_list ).insertAfter( $current_attr_select );
+
+					if ( attributes_current_value_toggle === 'no' ) {
+						$current_attr_value.css( "display", "none" );
+					}
 				} );
 
 				$form.on(

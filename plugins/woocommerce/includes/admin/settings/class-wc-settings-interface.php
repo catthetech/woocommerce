@@ -109,6 +109,14 @@ class WC_Settings_Interface extends WC_Settings_Page {
 				),
 
 				array(
+					'title'    => __( 'Show current value (list)', 'woocommerce' ),
+					'desc'     => __( 'This controls whether or not the current value is shown above the list (only works when the value display method is set to list).', 'woocommerce' ),
+					'id'       => 'attributes_current_value_toggle',
+					'default'  => 'yes',
+					'type'     => 'checkbox',
+				),
+
+				array(
 					'type' => 'sectionend',
 					'id'   => 'attributes_dropdown_options',
 				),
