@@ -87,9 +87,11 @@
 
 				$form.on(
 					"change.wc-variation-form", ".variations select", function () {
+						// The native select has changed, update $current_attr_value and add/remove the selected class for lis
 						const $current_attr_select = $( this );
-						const $current_li = $current_attr_select.siblings( 'ul.wc-variations-attribute' ).children( `li[data-value="${ $current_attr_select.val() }"]` );
-						$current_attr_select.siblings( 'p.current-attribute-value' ).text( $current_attr_select.children( `option[value="${ $current_attr_select.val() }"]` ).text() );
+						const v = $current_attr_select.val();
+						const $current_li = $current_attr_select.siblings( 'ul.wc-variations-attribute' ).children( `li[data-value="${ v }"]` );
+						$current_attr_select.siblings( 'p.current-attribute-value' ).text( $current_attr_select.children( `option[value="${ v }"]` ).text() );
 						$current_li.siblings( 'li' ).removeClass( 'selected' );
 						$current_li.addClass( 'selected' );
 					}
@@ -99,8 +101,17 @@
 						e.preventDefault();
 						e.stopPropagation();
 						const $current_li = $( this );
-						const v = $current_li.data( 'value' );
-						$current_li.parent( 'ul' ).siblings( 'select' ).val( v ).trigger( "change" ).trigger( "click" );
+						const $current_attr_select = $current_li.parent( 'ul' ).siblings( 'select' );
+
+						if ( $current_li.hasClass( 'selected' ) ) {
+							// The value was already selected, deselect it
+							$current_attr_select.val( '' );
+						} else {
+							// The value was not selected, select it
+							const v = $current_li.data( 'value' );
+							$current_attr_select.val( v );
+						}
+						$current_attr_select.trigger( "change" ).trigger( "click" );
 					}
 				);
 			}
